@@ -1,13 +1,29 @@
-<?php 
+<?php
+
 namespace App\Controllers;
 
-class HomeController {
-    public function index() {
-        echo static::class . "Method Index";
+use App\Models\CategoryModel;
+use App\Models\ProductModel;
+
+class HomeController extends Controller
+{
+    public function index()
+    {
+
+        $cate = new CategoryModel();
+        $product = $cate->all();
+        $this->view('home', ['product' => $product]);
     }
 
 
-    public function contact() {
-        echo static::class . "Method Contact";
+    public function contact()
+    {
+        $this->view('contact');
+    }
+
+    public function show()
+    {
+        $product = ProductModel::all();
+        $this->view('site/showproduct', ['products' => $product]);
     }
 }
